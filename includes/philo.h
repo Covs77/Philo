@@ -6,7 +6,7 @@
 /*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:40:46 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/05 19:42:12 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/05 20:34:36 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ typedef struct s_table
 
 void	ft_l(void);
 int		ft_strlen(char *str);
-long int	ft_atoi(const char *str);
-void	ft_init_table(t_table *table);
-void	ft_check_args(int argc, char *argv, t_table *table);
+long int	ft_atoi(char *str);
+void	ft_init_table(t_table **table);
+void	ft_check_args(int argc, char **argv, t_table *table);
 void ft_error (char *str);
 
 #endif

@@ -4,12 +4,11 @@ NAME = philo
 
 
 # compilador
-CC = gcc #-g
+CC = gcc 
 
-CFLAGS = -Wall -Werror -Wextra #-fsanitize=address
+CFLAGS = -Wall -Werror -Wextra 
 
 LIB = ar rcs
-
 
 SRC = src/philo.c src/philo_utils.c
 
@@ -17,27 +16,21 @@ OBJS = $(SRC:.c=.o)
 
 
 
-
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIB_SYS) -o $(NAME)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
 $(OBJS): %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 
+all: clean $(NAME)
 
-$(LIBFT_PATH):
-	make -s -C $(LIBFT_DIR)
-
-# Agrega los archivos objeto a la lista de archivos secundarios
-all: $(NAME)
 
 clean:
-	rm -f $(OBJS) 
-	
+	rm -f $(OBJS)
+		
 			
 fclean: clean
-	make fclean -s -C 
 	rm -f $(NAME)
 
 

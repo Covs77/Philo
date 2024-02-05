@@ -6,7 +6,7 @@
 /*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:42:15 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/05 19:33:47 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/05 20:35:08 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 void ft_error (char *str)
 {
-	printf("Error: %s\n\n", str);
-	printf("Inputs:\n");
+	printf("%s\n. Use: \n", str);
 	printf("./philo <number_philo> <time_die> <time_eat> <time_sleep> ");
-	printf("[optional] <each_time_each_must_eat_until_finish_the_program>\n");
+	printf("[optional] <each_time_each_must_eat_until_finish_the_program>\n\n");
 	exit(1);
 }
 
@@ -38,7 +37,7 @@ int ft_strlen(char *str)
 	return (i);
 }
 
-long int	ft_atoi(const char *str)
+long int	ft_atoi(char *str)
 {
 	long int	num;
 	long int	sign;
