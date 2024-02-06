@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:42:15 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/05 20:35:08 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/06 18:28:49 by cova             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 void ft_error (char *str)
 {
-	printf("%s\n. Use: \n", str);
-	printf("./philo <number_philo> <time_die> <time_eat> <time_sleep> ");
-	printf("[optional] <each_time_each_must_eat_until_finish_the_program>\n\n");
+	printf(BOLD RED "%s\n" RESET, str);
+	printf(GREEN "Use: \n");
+	printf("../philo <number_philo> <time_die> <time_eat> <time_sleep> ");
+	printf("[opt] <each_time_must_eat_until_finish_the_program>\n\n" RESET);
 	exit(1);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:39:44 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/05 20:43:07 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/06 17:20:02 by cova             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,33 +31,8 @@ void ft_init_table(t_table **t)
 
 }
 
-void	ft_check_args(int argc, char **argv, t_table *table)
-{
-	int i;
 
-	i= 0;
-	if (argc == 5 || argc == 6)
-	{
-		table->philo = ft_atoi(argv[1]);
-		table->time_life = ft_atoi(argv[2]);
-		table->time_eat = ft_atoi(argv[3]);
-		table->time_sleep = ft_atoi(argv[4]);
-		if (argc == 6)
-			table->n_eat = ft_atoi(argv[5]);
-	}
-	else 
-			ft_error ("Error: Wrong number of arguments\n");
-	
-	
-		printf("Nª total philos: %ld\n", table->philo);
-		printf("time_life: %ld\n", table->time_life);
-		printf("time_eat: %ld\n", table->time_eat);
-		printf("time_sleep: %ld\n", table->time_sleep);
-		printf("n_eat: %ld\n", table->n_eat);
-		i++;
 
-} 
-		
 
 
 int main(int argc, char **argv)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:40:46 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/05 20:34:36 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/06 18:26:21 by cova             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@
 # include <sys/wait.h>
 #include <pthread.h>
 
+
+# define RESET "\x1B[0m"
+# define RED "\x1B[31m"
+# define GREEN "\x1B[32m"
+# define YELLOW "\x1B[33m"
+# define BLUE "\x1B[34m"
+# define MAGENTA "\x1B[35m"
+# define CYAN "\x1B[36m"
+# define WHITE "\x1B[37m" 
+# define BOLD   "\033[1m"
 
 typedef struct s_philo
 {
@@ -60,5 +70,7 @@ long int	ft_atoi(char *str);
 void	ft_init_table(t_table **table);
 void	ft_check_args(int argc, char **argv, t_table *table);
 void ft_error (char *str);
+int	ft_isdigit(int c);
+int	ft_check_num(char **str);
 
 #endif
