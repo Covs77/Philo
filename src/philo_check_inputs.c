@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_check_inputs.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 17:17:35 by cova              #+#    #+#             */
-/*   Updated: 2024/02/06 18:38:45 by cova             ###   ########.fr       */
+/*   Updated: 2024/02/08 18:39:21 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,7 @@ void	ft_check_args(int argc, char **argv, t_table *table)
 	if (table->philo < 2 || table->philo > 200)
 		ft_error("Error: Wrong number of philos\n");
 	
-	printf(RED "Nª total philos: %ld\n" RESET, table->philo);
-	printf(GREEN "time_life: %ld\n" RESET, table->time_life);
-	printf(BLUE "time_eat: %ld\n" RESET, table->time_eat);
-	printf(MAGENTA "time_sleep: %ld\n" RESET, table->time_sleep);
-	printf(WHITE "n_eat: %ld\n" RESET, table->n_eat);
+	//ft_print_table(table);
 	
 
 } 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:40:46 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/06 18:26:21 by cova             ###   ########.fr       */
+/*   Updated: 2024/02/08 20:22:23 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,7 @@
 # define WHITE "\x1B[37m" 
 # define BOLD   "\033[1m"
 
-typedef struct s_philo
-{
-	int eat_times; //numero de veces que ha comido
-	int time_to_die; //tiempo desde la ultima vez q comió	
-}					t_philo;
+typedef struct s_philo t_philo;
 
 typedef struct s_fork
 {
@@ -59,18 +55,25 @@ typedef struct s_table
 	long	time_eat; //tiempo de comer
 	long	time_sleep; //tiempo de dormir
 	long 	n_eat; //numero de veces que debe comer
+	int		dead; //muerte
 }				t_table;
 
 
+typedef struct s_philo
+{
+	long id; //id del filosofo
+	t_table *t;
+}				t_philo;
 
-
-void	ft_l(void);
-int		ft_strlen(char *str);
+void		ft_l(void);
+int			ft_strlen(char *str);
 long int	ft_atoi(char *str);
-void	ft_init_table(t_table **table);
-void	ft_check_args(int argc, char **argv, t_table *table);
-void ft_error (char *str);
-int	ft_isdigit(int c);
-int	ft_check_num(char **str);
+void		ft_init_table(t_table *table);
+void		ft_check_args(int argc, char **argv, t_table *table);
+void		ft_error (char *str);
+int			ft_isdigit(int c);
+int			ft_check_num(char **str);
+void		ft_start_table(t_table *table, t_philo *p);
+void		ft_print_table(t_table *table);
 
 #endif

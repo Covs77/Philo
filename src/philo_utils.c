@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:42:15 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/06 18:28:49 by cova             ###   ########.fr       */
+/*   Updated: 2024/02/08 20:35:04 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,26 @@ long int	ft_atoi(char *str)
 		exit(1);
 	}
 	return (sign * num);
+}
+
+
+void ft_print_table(t_table *table)
+{
+	long i;
+	
+	printf(RED "Nª total philos: %ld\n" RESET, table->philo);
+	if (table->philo != 0)
+	{
+		i = 0;
+		while (i < table->philo)
+		{
+			printf(YELLOW "Philosofo nº: %ld\n" RESET, table->ph[i].id);
+			printf(GREEN "time_life: %ld\n" RESET, table->time_life);
+			printf(BLUE "Eat times: %ld\n" RESET, table->n_eat);
+			//printf(MAGENTA "time_sleep: %ld\n" RESET, table->time_sleep);
+			//printf(CYAN "n_eat: %ld\n" RESET, table->n_eat);
+			//table->ph++;
+			i++;
+		}
+	}
 }
