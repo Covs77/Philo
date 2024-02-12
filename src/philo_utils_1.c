@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_utils1.c                                     :+:      :+:    :+:   */
+/*   philo_utils_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:50:51 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/12 18:50:58 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/12 20:43:14 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,19 @@ void ft_print_table(t_table *table)
 {
 	long i;
 	
-	printf(RED "Nª total philos: %ld\n" RESET, table->philo);
+	printf(RED "N1: %ld\n" RESET, table->philo);
 	if (table->philo != 0)
 	{
+		printf("Nª total philos: %ld\n", table->philo);
 		i = 0;
 		while (i < table->philo)
 		{
 			printf(YELLOW "Philosofo nº: %ld\n" RESET, table->ph[i].id);
-			printf(GREEN "time_life: %ld\n" RESET, table->time_life);
+			printf(MAGENTA "fork (id): %d\n" RESET, table->fork[i].id);
+			printf(CYAN "time_life: %ld\n" RESET, table->time_life);
+			printf(CYAN "Time_eat: %ld\n" RESET, table->time_eat);
+			printf(CYAN "Time_sleep: %ld\n" RESET, table->time_sleep);
 			printf(BLUE "Eat times: %ld\n" RESET, table->n_eat);
-			//printf(MAGENTA "time_sleep: %ld\n" RESET, table->time_sleep);
-			//printf(CYAN "n_eat: %ld\n" RESET, table->n_eat);
-			//table->ph++;
 			i++;
 		}
 	}
