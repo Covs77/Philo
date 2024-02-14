@@ -6,14 +6,11 @@
 /*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:50:22 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/12 20:44:17 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/14 19:22:21 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../includes/philo.h"
-
-
 
 void ft_init_mutex(t_table *t)
 {
@@ -26,7 +23,7 @@ void ft_init_mutex(t_table *t)
 			ft_error("Error: Mutex init failed\n");
 		i++;
 	}
-	if (pthread_mutex_init(&t->mutex_t, NULL) != 0)
+	if (pthread_mutex_init(&t->mtx_table, NULL) != 0)
 			ft_error("Error: Mutex init failed\n");
 }
 void		ft_init_table(t_table *t)

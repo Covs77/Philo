@@ -6,7 +6,7 @@
 /*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 17:17:35 by cova              #+#    #+#             */
-/*   Updated: 2024/02/12 20:42:45 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/14 19:07:40 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,14 @@ void	ft_check_args(int argc, char **argv, t_table *table)
 			{
 				table->n_eat = ft_atoi(argv[5]);
 				if (table->n_eat > INT_MAX)
-					ft_error("Gloton, no puedes comer tanto");
+					ft_error_inputs("Gloton, no puedes comer tanto");
 				else if (table->n_eat < 1)
-					ft_error("Debes comer al menos 1 vez o morirás de hambre");
+					ft_error_inputs("Debes comer al menos 1 vez o morirás de hambre");
 			}
 	}
 	else 
-			ft_error ("Error: Wrong arguments\n");
+			ft_error_inputs("Error: Wrong arguments\n");
 	if (table->philo < 2 || table->philo > 200)
-		ft_error("Error: Wrong number of philos\n");
+		ft_error_inputs("Error: Wrong number of philos\n");
 	
 }

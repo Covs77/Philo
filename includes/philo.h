@@ -6,7 +6,7 @@
 /*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:40:46 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/12 20:37:30 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/14 19:18:27 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,24 +45,26 @@ typedef struct s_philo
 	long				last_eat; //tiempo de la ultima comida
 }				t_philo;
 
-typedef struct s_fork
+typedef struct	s_fork
 {
 	pthread_mutex_t fork_l; //mutex para el tenedor
 	int				id;		//id del tenedor
 }				t_fork;
 
-typedef struct s_table
+typedef struct	s_table
 {
 	
-	long 		philo; //numero de filósofos
-	t_philo		*ph; //tipo filosofo
-	t_fork		*fork; //tipo tenedor
-	long		time_life; //tiempo de vida
-	long		time_eat; //tiempo de comer
-	long		time_sleep; //tiempo de dormir
-	long 		n_eat; //numero de veces que debe comer
-	int			dead; //muerte
-	pthread_mutex_t mutex_t; //mutex para la mesa
+	long 			philo; //numero de filósofos
+	t_philo			*ph; //tipo filosofo
+	t_fork			*fork; //tipo tenedor
+	long 			clock; //tiempo real
+	long			time_start; //tiempo de inicio
+	long			time_life; //tiempo de vida
+	long			time_eat; //tiempo de comer
+	long			time_sleep; //tiempo de dormir
+	long 			n_eat; //numero de veces que debe comer
+	int				dead; //muerte
+	pthread_mutex_t mtx_table; //mutex para la mesa
 }				t_table;
 
 void		ft_l(void);
@@ -72,8 +74,10 @@ void		ft_init_philo(t_philo *philo);
 void 		ft_init_fork(t_fork *fork);
 void		ft_init_mutex(t_table *t);
 void		ft_init_table(t_table *t);
+long		init_time(void);
 void		ft_check_args(int argc, char **argv, t_table *table);
 void		ft_error (char *str);
+void		ft_error_inputs(char *str);
 int			ft_isdigit(int c);
 int			ft_check_num(char **str);
 void		ft_start_table(t_table *table);

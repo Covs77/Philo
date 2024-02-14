@@ -6,13 +6,13 @@
 /*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:50:51 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/12 20:43:14 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/14 19:07:06 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void ft_error (char *str)
+void ft_error_inputs(char *str)
 {
 	printf(BOLD RED "%s\n" RESET, str);
 	printf(GREEN "Use: \n");
@@ -20,7 +20,11 @@ void ft_error (char *str)
 	printf("[opt] <each_time_must_eat_until_finish_the_program>\n\n" RESET);
 	exit(1);
 }
-
+void ft_error(char *str)
+{
+	printf(BOLD RED "%s\n" RESET, str);
+	exit(1);
+}
 
 
 void	ft_l(void)
