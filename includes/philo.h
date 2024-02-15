@@ -6,7 +6,7 @@
 /*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:40:46 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/14 19:18:27 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/15 20:53:44 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_philo
 	long				id; //id del filosofo
 	int					num_comidas; //veces que ha comido
 	long				last_eat; //tiempo de la ultima comida
+	pthread_t			thread; //hilo del filosofo
 }				t_philo;
 
 typedef struct	s_fork
@@ -76,11 +77,15 @@ void		ft_init_mutex(t_table *t);
 void		ft_init_table(t_table *t);
 long		init_time(void);
 void		ft_check_args(int argc, char **argv, t_table *table);
-void		ft_error (char *str);
+void		ft_error(char *str);
 void		ft_error_inputs(char *str);
 int			ft_isdigit(int c);
 int			ft_check_num(char **str);
 void		ft_start_table(t_table *table);
+int			ft_dead(t_table *t);
+void		ft_rutine(t_table *table, t_philo *ph);
+void		ft_take_forks(t_table *t, t_philo *ph);
+void		ft_init_pthread(t_table	*table);
 void		ft_print_table(t_table *table);
 
 #endif
