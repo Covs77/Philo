@@ -25,7 +25,8 @@ CFLAGS = -Wall -Werror -Wextra -pthread
 LIB = ar rcs
 
 SRC = src/philo.c src/philo_utils_1.c src/philo_check_inputs.c \
-src/philo_pthread.c src/philo_init.c src/philo_rutine.c 
+src/philo_pthread.c src/philo_init.c src/philo_rutine.c \
+src/philo_utils_2.c 
 
 
 OBJS = $(SRC:.c=.o)

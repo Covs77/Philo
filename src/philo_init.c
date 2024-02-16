@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:50:22 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/14 19:22:21 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/16 19:32:27 by cova             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void ft_init_philo(t_philo *p)
 {
 	p->id = 0;
 	p->last_eat = 0;
+	p->meals = 0;
 }
 
 void 		ft_init_fork(t_fork *fork)
@@ -65,6 +66,7 @@ void	ft_start_table(t_table *table)
 	{
 		table->fork[i].id = i + 1;
 		table->ph[i].id = i + 1;
+		table->ph[i].meals = table->n_eat;
 		i++;
 	}
 	

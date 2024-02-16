@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   philo_pthread.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 20:48:59 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/15 20:59:21 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/16 19:16:42 by cova             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
 
-long	init_time(void)
+long	ft_init_time(void)
 {
 	unsigned long	nbr;
 	struct timeval	init;
@@ -24,23 +24,33 @@ long	init_time(void)
 	return (nbr);
 }
 
-/* 
+void	ft_usleep(int ms)
+{
+	long			time;
+
+	time = ft_init_time();
+	usleep(ms * 920);
+	while (ft_init_time() < time + ms)
+		usleep(ms * 3);
+}
+
+
 void	*routine(void *args)
 {
 	t_philo	*p;
 
 	p = (t_philo *)args;
 	if (p->id % 2 == 0)
-		ft_usleep(1, p->t);
+		ft_usleep(1);
 	ft_simulator(p);
-	if (p->philo == 1)
+	if (p->id == 1)
 		return (NULL);
-	else if (ft_num_meals(p))
-		return (NULL);
-	else if (ft_dead(p))
-		return (NULL);
+//	else if (ft_num_meals(p))
+//		return (NULL);
+//	else if (ft_dead(p))
+//		return (NULL);
 	return (NULL);
-} */
+} 
 
 void	ft_init_pthread(t_table	*table)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_rutine.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 20:20:43 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/15 20:57:19 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/16 19:16:18 by cova             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,33 +30,31 @@ int	ft_dead(t_table *t)
 
 
 
-void	ft_take_forks(t_table *t, t_philo *ph)
+void	ft_take_forks(t_philo *ph)
 {
-	pthread_mutex_lock(&t.fork[ph->id]->fork_l);
-	printf("Philosopher %ld taken left fork\n", ph->id);
-	if (t->philo != 1)
-	{
-		pthread_mutex_lock(&t->fork[ph->id + 1]->fork_l);
-		printf("Philosopher %ld taken right fork\n", ph->id);
-	}
-	else
-	{
-		pthread_mutex_unlock(&t->fork[ph->id]->fork_l);
-		return ;		
-	}
+	ft_print_action(ph->id, "take left fork\n");
+	ft_print_action(ph->id, "take right fork\n");
+	
+}
+void ft_eating(t_philo *ph)
+{
+	ft_print_action(ph->id, "is eating\n");
+	
+}
+void ft_sleeping(t_philo *ph)
+{
+	ft_print_action(ph->id, "is sleeping\n");
 }
 
-
-
-void ft_simulator(t_table *table, t_philo *ph)
+void ft_thinking(t_philo *ph)
 {
-	while (table->dead != 0)
-	{
-		if (ft_is_dead(&table))
-			break ;
-		ft_take_forks(table, ph);
-		
+	ft_print_action(ph->id, "is thinking\n");
+}
 
-
-	}
+void ft_simulator(t_philo *ph)
+{
+	ft_take_forks(ph);
+	ft_eating(ph);
+	ft_thinking(ph);
+	ft_sleeping(ph);
 }
