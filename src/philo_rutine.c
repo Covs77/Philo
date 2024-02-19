@@ -6,7 +6,7 @@
 /*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 20:20:43 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/19 21:14:43 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/19 21:17:06 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,14 @@ void controller (t_table *t)
 
 ///con un bucle infinito chequeo que han comido y
 //que ninguno esté muerto
-	/*void	*controller(void *args)
+/* void	controller(void *args)
 {
-	t_table	*t;
-
-	t = (t_table *)args;
 	while (1)
 	{
 		if (ft_exit_for_eat(t))
-			return (NULL);
+			exit(0); // break? // cerrar hilos // free all??????
 		if (check_is_died(t))
-			return (NULL);
+			exit(0); // break? // cerrar hilos // free all??????
 	}
 	return (NULL);
 }*/
