@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:50:51 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/16 19:37:43 by cova             ###   ########.fr       */
+/*   Updated: 2024/02/19 18:09:00 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void ft_error_inputs(char *str)
+void	ft_error_inputs(char *str)
 {
 	printf(BOLD RED "%s\n" RESET, str);
 	printf(GREEN "Use: \n");
@@ -20,21 +20,21 @@ void ft_error_inputs(char *str)
 	printf("[opt] <each_time_must_eat_until_finish_the_program>\n\n" RESET);
 	exit(1);
 }
-void ft_error(char *str)
+
+void	ft_error(char *str)
 {
 	printf(BOLD RED "%s\n" RESET, str);
 	exit(1);
 }
-
 
 void	ft_l(void)
 {
 	system("leaks philo");
 }
 
-int ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -68,25 +68,4 @@ long int	ft_atoi(char *str)
 		exit(1);
 	}
 	return (sign * num);
-}
-
-
-void ft_print_table(t_table *table)
-{
-	long i;
-	
-	if (table->philo != 0)
-	{
-		i = 0;
-		while (i < table->philo)
-		{
-			printf(YELLOW "Philosofo nº: %ld\n" RESET, table->ph[i].id);
-			printf(MAGENTA "fork (id): %d\n" RESET, table->fork[i].id);
-			printf(CYAN "time_life: %ld\n" RESET, table->time_life);
-			printf(CYAN "Time_eat: %ld\n" RESET, table->time_eat);
-			printf(CYAN "Time_sleep: %ld\n" RESET, table->time_sleep);
-			printf(BLUE "Eat times: %d\n" RESET, table->ph[i].meals);
-			i++;
-		}
-	}
 }

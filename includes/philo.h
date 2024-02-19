@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:40:46 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/16 19:27:31 by cova             ###   ########.fr       */
+/*   Updated: 2024/02/19 20:53:00 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@
 # include <stdio.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-#include <pthread.h>
-
-
+# include <pthread.h>
 # define RESET "\x1B[0m"
 # define RED "\x1B[31m"
 # define GREEN "\x1B[32m"
@@ -37,6 +35,7 @@
 # define WHITE "\x1B[37m" 
 # define BOLD   "\033[1m"
 
+typedef struct s_table t_table;
 
 typedef struct s_philo
 {
@@ -44,38 +43,38 @@ typedef struct s_philo
 	int					meals; //veces que ha comido
 	long				last_eat; //tiempo de la ultima comida
 	pthread_t			thread; //hilo del filosofo
+	t_table 			*table; //mesa
 }				t_philo;
 
-typedef struct	s_fork
+typedef struct s_fork
 {
-	pthread_mutex_t fork_l; //mutex para el tenedor
+	pthread_mutex_t	fork_l; //mutex para el tenedor
 	int				id;		//id del tenedor
 }				t_fork;
 
-typedef struct	s_table
+typedef struct s_table
 {
-	
-	long 			philo; //numero de filósofos
+	long			philo; //numero de filósofos
 	t_philo			*ph; //tipo filosofo
 	t_fork			*fork; //tipo tenedor
-	long 			clock; //tiempo real
 	long			time_start; //tiempo de inicio
 	long			time_life; //tiempo de vida
 	long			time_eat; //tiempo de comer
 	long			time_sleep; //tiempo de dormir
-	long 			n_eat; //numero de veces que debe comer
+	long			n_eat; //numero de veces que debe comer
 	int				dead; //muerte
-	pthread_mutex_t mtx_table; //mutex para la mesa
+	pthread_mutex_t	mtx_dead; //mutex para la muerte
+	pthread_mutex_t	mtx_table; //mutex para la mesa
 }				t_table;
 
 void		ft_l(void);
 int			ft_strlen(char *str);
 long int	ft_atoi(char *str);
+long		ft_init_time(void);
 void		ft_init_philo(t_philo *philo);
-void 		ft_init_fork(t_fork *fork);
+void		ft_init_fork(t_fork *fork);
 void		ft_init_mutex(t_table *t);
 void		ft_init_table(t_table *t);
-long		ft_init_time(void);
 void		ft_check_args(int argc, char **argv, t_table *table);
 void		ft_error(char *str);
 void		ft_error_inputs(char *str);
@@ -90,9 +89,10 @@ void		ft_thinking(t_philo *ph);
 void		ft_sleeping(t_philo *ph);
 void		ft_simulator(t_philo *ph);
 void		ft_init_pthread(t_table	*table);
-void 		ft_kill_pthread(t_table *table);
-void		ft_print_table(t_table *table);
-void 		ft_print_action(long id, char *str);
+void		ft_kill_pthread(t_table	*table);
+void		ft_print_table(t_table	*table);
+void		ft_print_action(t_philo *ph, char *str);
 void		ft_free_all(t_table *table);
+void		ft_usleep(int ms);
 
 #endif

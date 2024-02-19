@@ -6,12 +6,11 @@
 /*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 17:17:35 by cova              #+#    #+#             */
-/*   Updated: 2024/02/14 19:07:40 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/19 20:32:31 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
-
 
 int	ft_isdigit(int c)
 {
@@ -50,25 +49,24 @@ int	ft_check_num(char **str)
 
 void	ft_check_args(int argc, char **argv, t_table *table)
 {
-		
 	if ((argc == 5 || argc == 6) && (ft_check_num(argv) == 0))
-	{	
-			table->philo = ft_atoi(argv[1]);
-            table->time_life = ft_atoi(argv[2]);
-            table->time_eat = ft_atoi(argv[3]);
-            table->time_sleep = ft_atoi(argv[4]);
-            if (argc == 6)
-			{
-				table->n_eat = ft_atoi(argv[5]);
-				if (table->n_eat > INT_MAX)
-					ft_error_inputs("Gloton, no puedes comer tanto");
-				else if (table->n_eat < 1)
-					ft_error_inputs("Debes comer al menos 1 vez o morirás de hambre");
-			}
+	{
+		table->philo = ft_atoi(argv[1]);
+		table->time_life = ft_atoi(argv[2]);
+		table->time_eat = ft_atoi(argv[3]);
+		table->time_sleep = ft_atoi(argv[4]);
+		table->time_start = ft_init_time();
+		if (argc == 6)
+		{
+			table->n_eat = ft_atoi(argv[5]);
+			if (table->n_eat > INT_MAX)
+				ft_error_inputs("Gloton, no puedes comer tanto");
+			else if (table->n_eat < 1)
+				ft_error_inputs("Debes comer 1 vez o morirás de hambre");
+		}
 	}
-	else 
-			ft_error_inputs("Error: Wrong arguments\n");
+	else
+		ft_error_inputs("Error: Wrong arguments\n");
 	if (table->philo < 2 || table->philo > 200)
 		ft_error_inputs("Error: Wrong number of philos\n");
-	
 }
