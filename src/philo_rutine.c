@@ -6,7 +6,7 @@
 /*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 20:20:43 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/20 21:07:25 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/20 21:10:37 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,9 +138,10 @@ void	ft_thinking(t_philo *ph)
 
 void	ft_simulator(t_philo *ph)
 {
-	
-	while (ph->table->dead != 1)
+	while (1)
 	{
+		if (ph->table->dead != 1)
+			break;
 		if (ft_dead(ph->table) == 1)
 			break ;
 		ft_take_forks(ph);
