@@ -6,7 +6,7 @@
 /*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 20:20:43 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/19 21:17:06 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/20 21:07:25 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,55 +14,74 @@
 
 
 
-void controller (t_table *t)
+void *controller (void *args)
 {
-
-///con un bucle infinito chequeo que han comido y
-//que ninguno esté muerto
-/* void	controller(void *args)
-{
+	t_table *t;
+	
+	t = (t_table *)args;
 	while (1)
 	{
+		if (ft_check_is_died(t))
+			return (NULL); // break? // cerrar hilos // free all??????
 		if (ft_exit_for_eat(t))
-			exit(0); // break? // cerrar hilos // free all??????
-		if (check_is_died(t))
-			exit(0); // break? // cerrar hilos // free all??????
+			return (NULL); // break? // cerrar hilos // free all??????
 	}
 	return (NULL);
-}*/
 }
 
-/*
-int	check_is_died(t_table *t)
+int	ft_exit_for_eat(t_table *t)
+{
+	int i;
+	int all;
+	
+	i= 0;
+	all = t->philo;
+	if (t->n_eat == -1)
+		return (0);
+	pthread_mutex_lock(&t->mtx_table);
+	while (all != 0)
+	{
+		if (t->ph[i].meals == 0)
+			all--;
+		else
+			return (0);
+		i++;
+	}
+	return (1);
+	
+}
+	
+int	ft_check_is_died(t_table *t)
 {
 	int	i;
 
+	//// aqui entra pero no comprueba bien los tiempos
 	i = 0;
-	while (i < t->n_philo)
+	long time;
+	time = ft_init_time();
+	ft_usleep(100);
+	
+			printf ("RESTA %ld\n", time - t->ph[i].last_eat);
+			printf ("Laste eat %ld\n", t->ph[i].last_eat);
+			printf ("Time life %ld\n",  t->time_life);
+	while (i < t->philo && t->dead == 0)
 	{
-		pthread_mutex_lock(&t->table);
-		if (time_start_prog() - t->arr_p[i].last_eat >= t->die_to_time
-			&& t->has_eaten == 0)
+		//pthread_mutex_lock(&t->mtx_table);
+		if (ft_init_time() - t->ph[i].last_eat >= t->time_life)
 		{
-			pthread_mutex_unlock(&t->table);
-			pthread_mutex_lock(&t->table);
-			t->is_dead = 1;
-			pthread_mutex_unlock(&t->table);
-			pthread_mutex_lock(&t->table);
-			printf("%ld" RED " %d died\n" RESET, time_start_prog()
-				- t->time_curr, t->arr_p[i].index);
-			pthread_mutex_unlock(&t->table);
+		//	pthread_mutex_unlock(&t->mtx_table);
+		//	pthread_mutex_lock(&t->mtx_dead);
+			t->dead = 1;
+			ft_print_action(&t->ph[i], "dead");
+		//	pthread_mutex_unlock(&t->mtx_dead);
 			return (1);
 		}
-		else
-			pthread_mutex_unlock(&t->table);
+		//else
+		//	pthread_mutex_unlock(&t->mtx_table);
 		i++;
-	}
+	} 
 	return (0);
 }
-
-*/
-
 
 int	ft_dead(t_table *t)
 {
@@ -79,16 +98,32 @@ int	ft_dead(t_table *t)
 
 void	ft_take_forks(t_philo *ph)
 {
-	ft_print_action(ph, "take left fork\n");
-	ft_print_action(ph, "take right fork\n");
+	//pthread_mutex_lock(&ph->table->fork[ph->id].fork_l);
+	ft_print_action(ph, "has take left fork\n");
+	ft_print_action(ph, "has take right fork\n"); ///aqui no va
+	/* if (ph->table->philo != 1)
+	{
+		if (ph->id == ph->table->philo)
+			pthread_mutex_lock(&ph->table->fork[1].fork_r);
+		else
+			pthread_mutex_lock(&ph->table->fork[ph->id + 1].fork_r);
+		ft_print_action(ph, "has take right fork\n");
+	}
+	else
+	{
+		pthread_mutex_unlock(&ph->table->fork[ph->id].fork_l);
+		return ;
+	} */
 }
+	
+
 void	ft_eating(t_philo *ph)
 {
 	ft_print_action(ph, "is eating\n");
 	ft_usleep(ph->table->time_eat);
-	//ft_print_table(ph->table);
 	ph->meals--;
-	//ft_print_table(ph->table);
+	ph->last_eat = ft_init_time();
+	printf("Meals: %d %ld\n", ph->meals, ph->id);
 }
 void	ft_sleeping(t_philo *ph)
 {
@@ -103,8 +138,17 @@ void	ft_thinking(t_philo *ph)
 
 void	ft_simulator(t_philo *ph)
 {
-	ft_take_forks(ph);
-	ft_eating(ph);
-	ft_thinking(ph);
-	ft_sleeping(ph);
+	
+	while (ph->table->dead != 1)
+	{
+		if (ft_dead(ph->table) == 1)
+			break ;
+		ft_take_forks(ph);
+		ft_eating(ph);
+		if (ph->meals == 0)
+			break ;
+		ft_sleeping(ph);
+		ft_thinking(ph);
+		
+	}
 }

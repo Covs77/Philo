@@ -6,7 +6,7 @@
 /*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 19:11:46 by cova              #+#    #+#             */
-/*   Updated: 2024/02/19 20:45:01 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:51:30 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_print_table(t_table *table)
 		{
 			printf(YELLOW "Philosofo nº: %ld\n" RESET, table->ph[i].id);
 			//printf(MAGENTA "fork (id): %d\n" RESET, table->fork[i].id);
-			//printf(CYAN "time_life: %ld\n" RESET, table->time_life);
+			printf(CYAN "time_life: %ld\n" RESET, table->time_life);
 			//printf(CYAN "Time_eat: %ld\n" RESET, table->time_eat);
 			//printf(CYAN "Time_sleep: %ld\n" RESET, table->time_sleep);
 			printf(BLUE "Eat times: %d\n" RESET, table->ph[i].meals);
@@ -75,3 +75,4 @@ void	ft_print_table(t_table *table)
 		}
 	}
 }
+

@@ -6,7 +6,7 @@
 /*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:40:46 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/19 20:53:00 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:18:49 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_philo
 typedef struct s_fork
 {
 	pthread_mutex_t	fork_l; //mutex para el tenedor
+	pthread_mutex_t	fork_r; //mutex para el tenedor
 	int				id;		//id del tenedor
 }				t_fork;
 
@@ -63,6 +64,7 @@ typedef struct s_table
 	long			time_sleep; //tiempo de dormir
 	long			n_eat; //numero de veces que debe comer
 	int				dead; //muerte
+	pthread_t		control;
 	pthread_mutex_t	mtx_dead; //mutex para la muerte
 	pthread_mutex_t	mtx_table; //mutex para la mesa
 }				t_table;
@@ -94,5 +96,8 @@ void		ft_print_table(t_table	*table);
 void		ft_print_action(t_philo *ph, char *str);
 void		ft_free_all(t_table *table);
 void		ft_usleep(int ms);
+void		*controller(void *args);
+int			ft_check_is_died(t_table *t);
+int			ft_exit_for_eat(t_table *t);
 
 #endif
