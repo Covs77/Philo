@@ -6,7 +6,7 @@
 /*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:39:44 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/20 20:51:08 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/21 19:38:39 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@ void	ft_kill_pthread(t_table *table)
 	i = 0;
 	while (i < table->philo)
 	{
-		if (pthread_join(table->ph[i].thread, NULL))
-			ft_error("Error joining thread");
+		pthread_mutex_destroy(&table->fork[i].fork_l);
+		pthread_mutex_destroy(&table->fork[i].fork_r);
 		i++;
 	}
-	pthread_join(table->control, NULL);
+	pthread_mutex_destroy(&table->mtx_table);
 }
+
 
 void	ft_free_all(t_table *table)
 {
@@ -52,9 +53,9 @@ int	main(int argc, char **argv)
 	ft_init_fork(&fork);
 	ft_check_args(argc, argv, &table);
 	ft_start_table(&table);
-	ft_print_table(&table); // solo para verificar
 	ft_init_mutex(&table);
 	ft_init_pthread(&table);
+	//ft_print_table(&table); // solo para verificar
 	ft_kill_pthread(&table);
 	ft_free_all(&table);
 	//ft_l();

@@ -6,7 +6,7 @@
 /*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 17:17:35 by cova              #+#    #+#             */
-/*   Updated: 2024/02/20 20:49:01 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/21 19:02:12 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	ft_check_args(int argc, char **argv, t_table *table)
 		table->time_eat = ft_atoi(argv[3]);
 		table->time_sleep = ft_atoi(argv[4]);
 		table->time_start = ft_init_time();
+		table->dead = 0;
 		if (argc == 6)
 		{
 			table->n_eat = ft_atoi(argv[5]);

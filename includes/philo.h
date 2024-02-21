@@ -6,7 +6,7 @@
 /*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:40:46 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/20 20:18:49 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/21 19:12:06 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,6 @@ void		ft_usleep(int ms);
 void		*controller(void *args);
 int			ft_check_is_died(t_table *t);
 int			ft_exit_for_eat(t_table *t);
+void		ft_init_joins(t_table *t);
 
 #endif

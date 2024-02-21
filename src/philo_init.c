@@ -6,7 +6,7 @@
 /*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:50:22 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/20 19:55:12 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/21 17:55:32 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_init_table(t_table *t)
 
 void	ft_init_philo(t_philo *p)
 {
-	p->id = 0;
+	p->id = 1;
 	p->last_eat = 0;
 	p->meals = 0;
 	p->table = NULL;

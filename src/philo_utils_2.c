@@ -6,7 +6,7 @@
 /*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 19:11:46 by cova              #+#    #+#             */
-/*   Updated: 2024/02/20 20:51:30 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/21 19:41:17 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_print_action(t_philo *ph, char *str)
 	id = ph->id;
 	time_act = ft_init_time();
 	clock = ph->table->time_start;
-	if (ft_strcmp(str, "dead") == 0)
+	if (ft_strcmp(str, "dead\n") == 0)
 		printf(RED "%ld %d %s" RESET, (time_act - clock), id, str);
 	else if (ft_strcmp(str, "is eating\n") == 0)
 		printf(WHITE "%ld %d %s" RESET, (time_act - clock), id, str);
@@ -51,9 +51,7 @@ void	ft_print_action(t_philo *ph, char *str)
 	else if (ft_strcmp(str, "take right fork\n") == 0)
 		printf(BLUE "%ld %d %s" RESET, (time_act - clock), id, str);
 	else
-	{
 		printf("%ld %d %s", (time_act - clock), id, str);
-	}
 }
 
 void	ft_print_table(t_table *table)
@@ -66,6 +64,7 @@ void	ft_print_table(t_table *table)
 		while (i < table->philo)
 		{
 			printf(YELLOW "Philosofo nº: %ld\n" RESET, table->ph[i].id);
+			printf(MAGENTA "Philosofo id: %ld\n" RESET, table->ph[i].id);
 			//printf(MAGENTA "fork (id): %d\n" RESET, table->fork[i].id);
 			printf(CYAN "time_life: %ld\n" RESET, table->time_life);
 			//printf(CYAN "Time_eat: %ld\n" RESET, table->time_eat);
