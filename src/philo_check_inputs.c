@@ -6,7 +6,7 @@
 /*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 17:17:35 by cova              #+#    #+#             */
-/*   Updated: 2024/02/21 19:02:12 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/22 17:12:39 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,6 @@ void	ft_check_args(int argc, char **argv, t_table *table)
 	}
 	else
 		ft_error_inputs("Error: Wrong arguments\n");
-	if (table->philo < 2 || table->philo > 200)
+	if (table->philo > 200)
 		ft_error_inputs("Error: Wrong number of philos\n");
 }

@@ -6,7 +6,7 @@
 /*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:50:22 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/21 17:55:32 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/22 19:37:21 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ void	ft_init_table(t_table *t)
 	t->time_life = 0;
 	t->time_eat = 0;
 	t->time_sleep = 0;
-	t->n_eat = 0;
+	t->n_eat = -1;
 	t->dead = 0;
+	t->food = 0;
 }
 
 void	ft_init_philo(t_philo *p)
@@ -71,7 +72,7 @@ void	ft_start_table(t_table *table)
 	{
 		table->fork[i].id = i + 1;
 		table->ph[i].id = i + 1;
-		table->ph[i].meals = -1;
+		table->ph[i].meals = table->n_eat;
 		table->ph[i].table = table;
 		table->ph[i].last_eat = table->time_start;
 		i++;

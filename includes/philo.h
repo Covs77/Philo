@@ -6,7 +6,7 @@
 /*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:40:46 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/21 19:12:06 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/22 20:07:45 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ typedef struct s_table
 	long			time_eat; //tiempo de comer
 	long			time_sleep; //tiempo de dormir
 	long			n_eat; //numero de veces que debe comer
-	int				dead; //muerte
+	int				food; //check de comidas
+	int				dead; // check de muerte
 	pthread_t		control;
 	pthread_mutex_t	mtx_dead; //mutex para la muerte
 	pthread_mutex_t	mtx_table; //mutex para la mesa
@@ -98,7 +99,8 @@ void		ft_free_all(t_table *table);
 void		ft_usleep(int ms);
 void		*controller(void *args);
 int			ft_check_is_died(t_table *t);
-int			ft_exit_for_eat(t_table *t);
 void		ft_init_joins(t_table *t);
+int			ft_foodie(t_table *t);
+int			ft_stop_all(t_table *t);
 
 #endif

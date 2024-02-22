@@ -6,7 +6,7 @@
 /*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 20:48:59 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/21 19:54:41 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/22 20:54:33 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,8 @@ void	*routine(void *args)
 	p = (t_philo *)args;
 	if (p->id % 2 == 0)
 		ft_usleep(1);
-	while (p->table->dead == 0)
+	while (p->table->dead == 0 && p->table->food == 0)
 		ft_simulator(p);
-	if (p->meals == 0)
-		ft_print_action(p, "Has finished eating\n");
-	if (p->table->dead == 1)
-		ft_print_action(p, "dead\n");
 	return (NULL);
 }
 
@@ -60,10 +56,11 @@ void	ft_init_pthread(t_table	*table)
 	if (pthread_create(&table->control, NULL, controller, table) != 0)
 		ft_error("Error creating thread");
 	while (i < table->philo)
-	{
+	{		
 		
 		if (pthread_create(&table->ph[i].thread, NULL, routine, &table->ph[i]) != 0)
 			ft_error("Error creating thread");
+		printf("El filosofo %d, tiene q comer %d veces\n", i, table->ph[i].meals);	
 		table->ph[i].last_eat = table->time_start;
 		i++;
 	}
