@@ -6,7 +6,7 @@
 /*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:50:22 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/22 19:37:21 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/26 20:03:20 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,15 @@ void	ft_init_mutex(t_table *t)
 	{
 		if (pthread_mutex_init(&t->fork[i].fork_l, NULL) != 0)
 			ft_error("Error: Mutex init failed\n");
+		if (pthread_mutex_init(&t->fork[i].fork_r, NULL) != 0)
+			ft_error("Error: Mutex init failed\n");
 		i++;
 	}
 	if (pthread_mutex_init(&t->mtx_table, NULL) != 0)
 		ft_error("Error: Mutex init failed\n");
 	if (pthread_mutex_init(&t->mtx_dead, NULL) != 0)
+		ft_error("Error: Mutex dead failed\n");
+	if (pthread_mutex_init(&t->mtx_print, NULL) != 0)
 		ft_error("Error: Mutex dead failed\n");
 	
 }
@@ -54,6 +58,7 @@ void	ft_init_philo(t_philo *p)
 void	ft_init_fork(t_fork *fork)
 {
 	fork->id = 0;
+	fork->busy = 0;
 }
 
 void	ft_start_table(t_table *table)

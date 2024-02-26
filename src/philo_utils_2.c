@@ -6,7 +6,7 @@
 /*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 19:11:46 by cova              #+#    #+#             */
-/*   Updated: 2024/02/22 17:52:58 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/26 19:22:51 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,30 +33,28 @@ void	ft_print_action(t_philo *ph, char *str)
 {
 	long	time_act;
 	long	clock;
-	int		id;
-
-	id = ph->id;
+	
 	time_act = ft_init_time();
 	clock = ph->table->time_start;
-//	pthread_mutex_lock(&ph->table->mtx_table);
+	pthread_mutex_lock(&ph->table->mtx_print);
 	if (ph->table->dead == 1)
-		printf(RED "%ld %d %s" RESET, (time_act - clock), id, str);
+		printf(RED "%ld %ld %s" RESET, (time_act - clock), ph->id, str);
 	if (ph->table->dead == 0)
 	{	
 		if (ft_strcmp(str, "is eating\n") == 0)
-			printf(WHITE "%ld %d %s" RESET, (time_act - clock), id, str);
+			printf(WHITE "%ld %ld %s" RESET, (time_act - clock), ph->id, str);
 		else if (ft_strcmp(str, "is sleeping\n") == 0)
-			printf(YELLOW "%ld %d %s" RESET, (time_act - clock), id, str);
+			printf(YELLOW "%ld %ld %s" RESET, (time_act - clock), ph->id, str);
 		else if (ft_strcmp(str, "is thinking\n") == 0)
-			printf(CYAN "%ld %d %s" RESET, (time_act - clock), id, str);
+			printf(CYAN "%ld %ld %s" RESET, (time_act - clock), ph->id, str);
 		else if (ft_strcmp(str, "take left fork\n") == 0)
-			printf(GREEN "%ld %d %s" RESET, (time_act - clock), id, str);
+			printf(GREEN "%ld %ld %s" RESET, (time_act - clock), ph->id, str);
 		else if (ft_strcmp(str, "take right fork\n") == 0)
-			printf(BLUE "%ld %d %s" RESET, (time_act - clock), id, str);
+			printf(BLUE "%ld %ld %s" RESET, (time_act - clock), ph->id, str);
 		else
-			printf("%ld %d %s", (time_act - clock), id, str);
+			printf("%ld %ld %s", (time_act - clock), ph->id, str);
 	}
-	//	pthread_mutex_unlock(&ph->table->mtx_table);
+	pthread_mutex_unlock(&ph->table->mtx_print);
 }
 
 

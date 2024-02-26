@@ -6,7 +6,7 @@
 /*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 20:48:59 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/22 20:54:33 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/26 19:03:59 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,16 @@ void	ft_init_pthread(t_table	*table)
 	table->time_start = ft_init_time();
 	
 	i = 0;
-	if (pthread_create(&table->control, NULL, controller, table) != 0)
+	if (pthread_create(&table->control, NULL, controller, table))
 		ft_error("Error creating thread");
 	while (i < table->philo)
-	{		
-		
-		if (pthread_create(&table->ph[i].thread, NULL, routine, &table->ph[i]) != 0)
+	{
+		if (pthread_create(&table->ph[i].thread, NULL, routine, &table->ph[i]) != 0) 
 			ft_error("Error creating thread");
-		printf("El filosofo %d, tiene q comer %d veces\n", i, table->ph[i].meals);	
 		table->ph[i].last_eat = table->time_start;
 		i++;
 	}
+	
 	ft_init_joins(table); ///no se si va aqui ni si ha de estar en bucle??
 }
 
