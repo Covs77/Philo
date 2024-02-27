@@ -7,7 +7,7 @@ NAME = philo
 # compilador
 CC = gcc 
 
-CFLAGS = -Wall -Werror -Wextra -pthread
+CFLAGS = -Wall -Werror -Wextra -pthread #-fsanitize=thread
 
 LIB = ar rcs
 

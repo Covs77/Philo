@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:40:46 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/26 20:51:24 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/27 20:30:06 by cova             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,16 @@ typedef struct s_philo
 	long				id; //id del filosofo
 	int					meals; //veces que ha comido
 	long				last_eat; //tiempo de la ultima comida
+	int 				fork_l_id; //id del tenedor izq
+	int 				fork_r_id; //id del tenedor der
+	pthread_mutex_t		fork_l; //mutex para el tenedor
+	pthread_mutex_t		fork_r; //mutex para el tenedor
 	pthread_t			thread; //hilo del filosofo
 	t_table 			*table; //mesa
 }				t_philo;
 
 typedef struct s_fork
 {
-	pthread_mutex_t	fork_l; //mutex para el tenedor
-	pthread_mutex_t	fork_r; //mutex para el tenedor
-	int				busy; //check de ocupado
 	int				id;		//id del tenedor
 }				t_fork;
 
@@ -88,7 +89,7 @@ int			ft_check_num(char **str);
 void		ft_start_table(t_table *table);
 int			ft_dead(t_table *t);
 void		ft_rutine(t_table *table, t_philo *ph);
-void		ft_take_forks(t_philo *ph);
+//void		ft_take_forks(t_philo *ph);
 void		ft_eating(t_philo *ph);
 void		ft_thinking(t_philo *ph);
 void		ft_sleeping(t_philo *ph);
@@ -104,7 +105,6 @@ int			ft_check_is_died(t_table *t);
 void		ft_init_joins(t_table *t);
 int			ft_foodie(t_table *t);
 int			ft_stop_all(t_table *t);
-void		ft_release_forks(t_philo *ph);
-int			ft_both_forks(t_philo *ph);
+
 
 #endif

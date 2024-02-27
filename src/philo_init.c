@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:50:22 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/26 20:03:20 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/27 20:49:27 by cova             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	ft_init_mutex(t_table *t)
 	i = 0;
 	while (i < t->philo)
 	{
-		if (pthread_mutex_init(&t->fork[i].fork_l, NULL) != 0)
+		if (pthread_mutex_init(&t->ph[i].fork_l, NULL) != 0)
 			ft_error("Error: Mutex init failed\n");
-		if (pthread_mutex_init(&t->fork[i].fork_r, NULL) != 0)
+		if (pthread_mutex_init(&t->ph[i].fork_r, NULL) != 0)
 			ft_error("Error: Mutex init failed\n");
 		i++;
 	}
@@ -58,7 +58,6 @@ void	ft_init_philo(t_philo *p)
 void	ft_init_fork(t_fork *fork)
 {
 	fork->id = 0;
-	fork->busy = 0;
 }
 
 void	ft_start_table(t_table *table)
@@ -80,6 +79,13 @@ void	ft_start_table(t_table *table)
 		table->ph[i].meals = table->n_eat;
 		table->ph[i].table = table;
 		table->ph[i].last_eat = table->time_start;
+		table->ph[i].fork_l_id = table->fork[i].id;
+		if (i == table->philo - 1)
+			table->ph[i].fork_r_id = 1;
+		else
+			table->ph[i].fork_r_id = table->fork[i].id + 1;
 		i++;
+		
 	}
+	//ft_print_table(table);
 }

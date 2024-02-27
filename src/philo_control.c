@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_control.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:53:58 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/26 20:19:17 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/27 20:46:06 by cova             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,25 @@ void *controller (void *args)
 int	ft_check_is_died(t_table *t)
 {
 	int	i;
-	long time;
+//	long time;
 
 	i = 0;
-	time = ft_init_time();
-	//pthread_mutex_lock(&t->mtx_dead);
+//	time = ft_init_time();
+	pthread_mutex_lock(&t->mtx_dead);
 	while (i < t->philo && t->dead == 0)
 	{
-		if (ft_init_time() - t->ph[i].last_eat >= t->time_life)
+		pthread_mutex_unlock(&t->mtx_dead);
+		if ((ft_init_time() - t->ph[i].last_eat) >= t->time_life)
 		{
-			//pthread_mutex_lock(&t->mtx_dead);
+			pthread_mutex_lock(&t->mtx_dead);
 			t->dead = 1;
-			//pthread_mutex_unlock(&t->mtx_dead);
+			pthread_mutex_unlock(&t->mtx_dead);
 			ft_print_action(&t->ph[i], "dead\n");
 			return (1);
 		}
 		i++;
 	} 
-	//pthread_mutex_unlock(&t->mtx_dead);
+	pthread_mutex_unlock(&t->mtx_dead);
 	return (0);
 }
 
@@ -72,28 +73,30 @@ int	ft_foodie(t_table *t)
 
 int	ft_dead(t_table *t)
 {
-	//pthread_mutex_lock(&t->mtx_dead);
+	pthread_mutex_lock(&t->mtx_dead);
 	if (t->dead == 1)
 	{
-	//	pthread_mutex_unlock(&t->mtx_dead);
+		pthread_mutex_unlock(&t->mtx_dead);
 		return (1);
 	}
 	else
-	//	pthread_mutex_unlock(&t->mtx_dead);
-	return (0);
+	{
+		pthread_mutex_unlock(&t->mtx_dead);
+		return (0);
+	}
 }
 
 int ft_stop_all(t_table *t)
 {
-	//pthread_mutex_lock(&t->mtx_dead);
+	pthread_mutex_lock(&t->mtx_dead);
 	if (t->dead == 1 || t->food == 1)
 	{
-	//	pthread_mutex_unlock(&t->mtx_dead);
+		pthread_mutex_unlock(&t->mtx_dead);
 		return (1);
 	}
 	else
 	{
-	//	pthread_mutex_unlock(&t->mtx_dead);
+		pthread_mutex_unlock(&t->mtx_dead);
 		return (0);
 	}
 }	

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_pthread.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 20:48:59 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/26 19:03:59 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/02/27 20:52:33 by cova             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_usleep(int ms)
 	long			time;
 
 	time = ft_init_time();
-	usleep(ms * 920);
+	usleep(ms * 1000);
 	while (ft_init_time() < time + ms)
 		usleep(ms * 3);
 }
@@ -41,7 +41,7 @@ void	*routine(void *args)
 
 	p = (t_philo *)args;
 	if (p->id % 2 == 0)
-		ft_usleep(1);
+		ft_usleep(100);
 	while (p->table->dead == 0 && p->table->food == 0)
 		ft_simulator(p);
 	return (NULL);
@@ -50,8 +50,8 @@ void	*routine(void *args)
 void	ft_init_pthread(t_table	*table)
 {
 	int	i;
-	table->time_start = ft_init_time();
 	
+	table->time_start = ft_init_time();
 	i = 0;
 	if (pthread_create(&table->control, NULL, controller, table))
 		ft_error("Error creating thread");
@@ -61,9 +61,10 @@ void	ft_init_pthread(t_table	*table)
 			ft_error("Error creating thread");
 		table->ph[i].last_eat = table->time_start;
 		i++;
-	}
+	} 
 	
-	ft_init_joins(table); ///no se si va aqui ni si ha de estar en bucle??
+	ft_init_joins(table);
+	
 }
 
 void	ft_init_joins(t_table *t)
