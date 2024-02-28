@@ -6,7 +6,7 @@
 /*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 20:48:59 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/27 20:52:33 by cova             ###   ########.fr       */
+/*   Updated: 2024/02/28 12:56:00 by cova             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ long	ft_init_time(void)
 	if (gettimeofday(&init, NULL) < 0)
 		ft_error("Time init error");
 	nbr = (init.tv_sec * 1000) + (init.tv_usec / 1000);
-	
 	return (nbr);
 }
 
@@ -36,35 +35,32 @@ void	ft_usleep(int ms)
 
 void	*routine(void *args)
 {
-	
 	t_philo	*p;
 
 	p = (t_philo *)args;
 	if (p->id % 2 == 0)
-		ft_usleep(100);
+		ft_usleep(1);
 	while (p->table->dead == 0 && p->table->food == 0)
 		ft_simulator(p);
 	return (NULL);
 }
 
-void	ft_init_pthread(t_table	*table)
+void	ft_init_pthread(t_table	*t)
 {
 	int	i;
-	
-	table->time_start = ft_init_time();
+
+	t->time_start = ft_init_time();
 	i = 0;
-	if (pthread_create(&table->control, NULL, controller, table))
+	if (pthread_create(&t->control, NULL, controller, t))
 		ft_error("Error creating thread");
-	while (i < table->philo)
+	while (i < t->philo)
 	{
-		if (pthread_create(&table->ph[i].thread, NULL, routine, &table->ph[i]) != 0) 
+		if (pthread_create(&t->ph[i].thread, NULL, routine, &t->ph[i]) != 0)
 			ft_error("Error creating thread");
-		table->ph[i].last_eat = table->time_start;
+		t->ph[i].last_eat = t->time_start;
 		i++;
-	} 
-	
-	ft_init_joins(table);
-	
+	}
+	ft_init_joins(t);
 }
 
 void	ft_init_joins(t_table *t)

@@ -6,26 +6,26 @@
 /*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:53:58 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/27 20:46:06 by cova             ###   ########.fr       */
+/*   Updated: 2024/02/28 12:51:55 by cova             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-
-void *controller (void *args)
+void	*controller(void *args)
 {
-	t_table *t;
-	
-	
+	t_table	*t;
+
 	t = (t_table *)args;
 	while (1)
 	{
 		if (ft_check_is_died(t) != 0)
+		{
+			ft_free_all(t);
 			return (NULL);
+		}
 		if (ft_foodie(t) != 0)
-			return (NULL) ;
-		
+			return (NULL);
 	}
 	return (NULL);
 }
@@ -33,10 +33,8 @@ void *controller (void *args)
 int	ft_check_is_died(t_table *t)
 {
 	int	i;
-//	long time;
 
 	i = 0;
-//	time = ft_init_time();
 	pthread_mutex_lock(&t->mtx_dead);
 	while (i < t->philo && t->dead == 0)
 	{
@@ -50,15 +48,15 @@ int	ft_check_is_died(t_table *t)
 			return (1);
 		}
 		i++;
-	} 
+	}
 	pthread_mutex_unlock(&t->mtx_dead);
 	return (0);
 }
 
 int	ft_foodie(t_table *t)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (i < t->philo && t->ph[i].meals == 0)
 		i++;
@@ -69,7 +67,6 @@ int	ft_foodie(t_table *t)
 	}
 	return (0);
 }
-
 
 int	ft_dead(t_table *t)
 {
@@ -86,7 +83,7 @@ int	ft_dead(t_table *t)
 	}
 }
 
-int ft_stop_all(t_table *t)
+int	ft_stop_all(t_table *t)
 {
 	pthread_mutex_lock(&t->mtx_dead);
 	if (t->dead == 1 || t->food == 1)
@@ -99,4 +96,4 @@ int ft_stop_all(t_table *t)
 		pthread_mutex_unlock(&t->mtx_dead);
 		return (0);
 	}
-}	
+}

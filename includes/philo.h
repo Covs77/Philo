@@ -6,7 +6,7 @@
 /*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:40:46 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/27 20:30:06 by cova             ###   ########.fr       */
+/*   Updated: 2024/02/28 12:58:31 by cova             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,31 +35,28 @@
 # define WHITE "\x1B[37m" 
 # define BOLD   "\033[1m"
 
-typedef struct s_table t_table;
+typedef struct s_table	t_table;
 
 typedef struct s_philo
 {
 	long				id; //id del filosofo
 	int					meals; //veces que ha comido
 	long				last_eat; //tiempo de la ultima comida
-	int 				fork_l_id; //id del tenedor izq
-	int 				fork_r_id; //id del tenedor der
 	pthread_mutex_t		fork_l; //mutex para el tenedor
-	pthread_mutex_t		fork_r; //mutex para el tenedor
+	pthread_mutex_t		*fork_r; //mutex para el tenedor
 	pthread_t			thread; //hilo del filosofo
-	t_table 			*table; //mesa
+	t_table				*table; //mesa
 }				t_philo;
 
-typedef struct s_fork
+/* typedef struct s_fork
 {
 	int				id;		//id del tenedor
-}				t_fork;
+}				t_fork; */
 
 typedef struct s_table
 {
 	long			philo; //numero de filósofos
 	t_philo			*ph; //tipo filosofo
-	t_fork			*fork; //tipo tenedor
 	long			time_start; //tiempo de inicio
 	long			time_life; //tiempo de vida
 	long			time_eat; //tiempo de comer
@@ -78,7 +75,6 @@ int			ft_strlen(char *str);
 long int	ft_atoi(char *str);
 long		ft_init_time(void);
 void		ft_init_philo(t_philo *philo);
-void		ft_init_fork(t_fork *fork);
 void		ft_init_mutex(t_table *t);
 void		ft_init_table(t_table *t);
 void		ft_check_args(int argc, char **argv, t_table *table);
@@ -89,7 +85,6 @@ int			ft_check_num(char **str);
 void		ft_start_table(t_table *table);
 int			ft_dead(t_table *t);
 void		ft_rutine(t_table *table, t_philo *ph);
-//void		ft_take_forks(t_philo *ph);
 void		ft_eating(t_philo *ph);
 void		ft_thinking(t_philo *ph);
 void		ft_sleeping(t_philo *ph);
@@ -105,6 +100,4 @@ int			ft_check_is_died(t_table *t);
 void		ft_init_joins(t_table *t);
 int			ft_foodie(t_table *t);
 int			ft_stop_all(t_table *t);
-
-
 #endif
