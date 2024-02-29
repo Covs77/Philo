@@ -36,10 +36,14 @@ clean:
 			
 fclean: clean
 	rm -f $(NAME)
+	rm -rf $(NAME).dSYM
+	rm -f .DS_Store
 
 
 re: fclean all
 
+norma:
+	norminette $(SRC) inc/philo.h
 
 .PHONY: re all clean fclean
 

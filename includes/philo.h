@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:40:46 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/28 12:58:31 by cova             ###   ########.fr       */
+/*   Updated: 2024/02/29 19:19:19 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_table
 	int				dead; // check de muerte
 	pthread_t		control;
 	pthread_mutex_t	mtx_dead; //mutex para la muerte
+	pthread_mutex_t	mtx_meal; //mutex para la comida
 	pthread_mutex_t	mtx_print; //mutex para imprimir
 	pthread_mutex_t	mtx_table; //mutex para la mesa
 }				t_table;
@@ -100,4 +101,5 @@ int			ft_check_is_died(t_table *t);
 void		ft_init_joins(t_table *t);
 int			ft_foodie(t_table *t);
 int			ft_stop_all(t_table *t);
+int			ft_food(t_table *t);
 #endif

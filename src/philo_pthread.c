@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_pthread.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 20:48:59 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/28 12:56:00 by cova             ###   ########.fr       */
+/*   Updated: 2024/02/29 20:44:37 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_usleep(int ms)
 	long			time;
 
 	time = ft_init_time();
-	usleep(ms * 1000);
+	usleep(ms * 960);
 	while (ft_init_time() < time + ms)
 		usleep(ms * 3);
 }
@@ -40,7 +40,7 @@ void	*routine(void *args)
 	p = (t_philo *)args;
 	if (p->id % 2 == 0)
 		ft_usleep(1);
-	while (p->table->dead == 0 && p->table->food == 0)
+	while (ft_dead(p->table) == 0 && ft_food(p->table) == 0)
 		ft_simulator(p);
 	return (NULL);
 }
@@ -55,9 +55,11 @@ void	ft_init_pthread(t_table	*t)
 		ft_error("Error creating thread");
 	while (i < t->philo)
 	{
+		pthread_mutex_lock(&t->mtx_table);
+		t->ph[i].last_eat = t->time_start;
+		pthread_mutex_unlock(&t->mtx_table);
 		if (pthread_create(&t->ph[i].thread, NULL, routine, &t->ph[i]) != 0)
 			ft_error("Error creating thread");
-		t->ph[i].last_eat = t->time_start;
 		i++;
 	}
 	ft_init_joins(t);

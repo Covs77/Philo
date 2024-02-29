@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:39:44 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/28 12:52:33 by cova             ###   ########.fr       */
+/*   Updated: 2024/02/29 20:22:40 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ void	ft_free_all(t_table *table)
 	pthread_mutex_destroy(&table->mtx_table);
 	pthread_mutex_destroy(&table->mtx_print);
 	pthread_mutex_destroy(&table->mtx_dead);
+	pthread_mutex_destroy(&table->mtx_meal);
 	free(table->ph);
-	exit(1);
+	return ;
 }
 
 int	main(int argc, char **argv)
@@ -42,6 +43,6 @@ int	main(int argc, char **argv)
 	ft_init_mutex(&table);
 	ft_init_pthread(&table);
 	ft_free_all(&table);
-	ft_l();
+	//ft_l();
 	return (0);
 }

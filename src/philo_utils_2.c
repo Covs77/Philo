@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 19:11:46 by cova              #+#    #+#             */
-/*   Updated: 2024/02/28 12:49:07 by cova             ###   ########.fr       */
+/*   Updated: 2024/02/29 20:16:24 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,20 @@ void	ft_print_action(t_philo *ph, char *str)
 	if (ph->table->dead == 1)
 	{	
 		printf(RED "%ld %ld %s" RESET, (time), ph->id, str);
-		exit(1);
+		return ;
 	}
-	if (ph->table->dead == 0)
-	{	
+	if (ft_stop_all(ph->table) == 0)
+	{
 		if (ft_strcmp(str, "is eating\n") == 0)
-			printf(WHITE "%ld %ld %s" RESET, (time), ph->id, str);
+			printf(MAGENTA "%ld %ld %s" RESET, (time), ph->id, str);
 		else if (ft_strcmp(str, "is sleeping\n") == 0)
 			printf(YELLOW "%ld %ld %s" RESET, (time), ph->id, str);
 		else if (ft_strcmp(str, "is thinking\n") == 0)
 			printf(CYAN "%ld %ld %s" RESET, (time), ph->id, str);
 		else if (ft_strcmp(str, "take left fork\n") == 0)
-			printf(GREEN "%ld %ld %s" RESET, (time), ph->id, str);
+			printf(RED "%ld %ld %s" RESET, (time), ph->id, str);
 		else if (ft_strcmp(str, "take right fork\n") == 0)
-			printf(BLUE "%ld %ld %s" RESET, (time), ph->id, str);
+			printf(GREEN "%ld %ld %s" RESET, (time), ph->id, str);
 		else
 			printf("%ld %ld %s", (time), ph->id, str);
 	}
@@ -77,3 +77,18 @@ void	ft_print_table(t_table *table)
 		}
 	}
 }
+int	ft_food(t_table *t)
+{
+	pthread_mutex_lock(&t->mtx_meal);
+	if (t->food == 1)
+	{
+		pthread_mutex_unlock(&t->mtx_meal);
+		return (1);
+	}
+	else
+	{
+		pthread_mutex_unlock(&t->mtx_meal);
+		return (0);
+	}
+}
+

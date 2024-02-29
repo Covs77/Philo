@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:50:22 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/28 12:56:17 by cova             ###   ########.fr       */
+/*   Updated: 2024/02/29 19:20:00 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,15 @@
 void	ft_init_mutex(t_table *t)
 {
 	if (pthread_mutex_init(&t->mtx_table, NULL) != 0)
-		ft_error("Error: Mutex init failed\n");
+		ft_error("Error: Mutex table failed\n");
 	if (pthread_mutex_init(&t->mtx_dead, NULL) != 0)
 		ft_error("Error: Mutex dead failed\n");
 	if (pthread_mutex_init(&t->mtx_print, NULL) != 0)
-		ft_error("Error: Mutex dead failed\n");
+		ft_error("Error: Mutex print failed\n");
+	if (pthread_mutex_init(&t->mtx_meal, NULL) != 0)
+		ft_error("Error: Mutex meal failed\n");
+	
+		
 }
 
 void	ft_init_table(t_table *t)
