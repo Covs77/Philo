@@ -7,7 +7,7 @@ NAME = philo
 # compilador
 CC = gcc 
 
-CFLAGS = -Wall -Werror -Wextra -pthread #-fsanitize=thread
+CFLAGS = -Wall -Werror -Wextra -pthread -fsanitize=thread
 
 LIB = ar rcs
 
@@ -43,7 +43,7 @@ fclean: clean
 re: fclean all
 
 norma:
-	norminette $(SRC) inc/philo.h
+	norminette $(SRC) includes/philo.h
 
 .PHONY: re all clean fclean
 

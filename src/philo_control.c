@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_control.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:53:58 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/29 20:42:58 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/03/02 12:19:11 by cova             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_check_is_died(t_table *t)
 			pthread_mutex_lock(&t->mtx_dead);
 			t->dead = 1;
 			pthread_mutex_unlock(&t->mtx_dead);
-			ft_print_action(&t->ph[i], "dead\n");
+			ft_print_action(&t->ph[i], "died\n");
 			return (1);
 		}
 		pthread_mutex_unlock(&t->mtx_table);
@@ -57,7 +57,8 @@ int	ft_foodie(t_table *t)
 	i = 0;
 	pthread_mutex_lock(&t->mtx_meal);
 	while (i < t->philo && t->ph[i].meals == 0)
-	{	pthread_mutex_unlock(&t->mtx_meal);
+	{
+		pthread_mutex_unlock(&t->mtx_meal);
 		i++;
 		pthread_mutex_lock(&t->mtx_meal);
 	}
@@ -80,7 +81,7 @@ int	ft_dead(t_table *t)
 		pthread_mutex_unlock(&t->mtx_dead);
 		return (1);
 	}
-	else 
+	else
 	{
 		pthread_mutex_unlock(&t->mtx_dead);
 		return (0);

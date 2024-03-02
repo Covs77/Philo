@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:40:46 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/29 19:19:19 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/03/02 12:23:07 by cova             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,36 +39,31 @@ typedef struct s_table	t_table;
 
 typedef struct s_philo
 {
-	long				id; //id del filosofo
-	int					meals; //veces que ha comido
-	long				last_eat; //tiempo de la ultima comida
-	pthread_mutex_t		fork_l; //mutex para el tenedor
-	pthread_mutex_t		*fork_r; //mutex para el tenedor
-	pthread_t			thread; //hilo del filosofo
-	t_table				*table; //mesa
+	long				id;
+	int					meals;
+	long				last_eat;
+	pthread_mutex_t		fork_l;
+	pthread_mutex_t		*fork_r;
+	pthread_t			thread;
+	t_table				*table;
 }				t_philo;
-
-/* typedef struct s_fork
-{
-	int				id;		//id del tenedor
-}				t_fork; */
 
 typedef struct s_table
 {
-	long			philo; //numero de filósofos
-	t_philo			*ph; //tipo filosofo
-	long			time_start; //tiempo de inicio
-	long			time_life; //tiempo de vida
-	long			time_eat; //tiempo de comer
-	long			time_sleep; //tiempo de dormir
-	long			n_eat; //numero de veces que debe comer
-	int				food; //check de comidas
-	int				dead; // check de muerte
+	long			philo;
+	t_philo			*ph;
+	long			time_start;
+	long			time_life;
+	long			time_eat;
+	long			time_sleep;
+	long			n_eat;
+	int				food;
+	int				dead;
 	pthread_t		control;
-	pthread_mutex_t	mtx_dead; //mutex para la muerte
-	pthread_mutex_t	mtx_meal; //mutex para la comida
-	pthread_mutex_t	mtx_print; //mutex para imprimir
-	pthread_mutex_t	mtx_table; //mutex para la mesa
+	pthread_mutex_t	mtx_dead;
+	pthread_mutex_t	mtx_meal;
+	pthread_mutex_t	mtx_print;
+	pthread_mutex_t	mtx_table;
 }				t_table;
 
 void		ft_l(void);

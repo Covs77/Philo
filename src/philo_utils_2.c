@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 19:11:46 by cova              #+#    #+#             */
-/*   Updated: 2024/02/29 20:16:24 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/03/02 12:20:19 by cova             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ void	ft_print_action(t_philo *ph, char *str)
 
 	time = ft_init_time() - ph->table->time_start;
 	pthread_mutex_lock(&ph->table->mtx_print);
-	if (ph->table->dead == 1)
+	if (ph->table->dead == 1 && (ft_strcmp(str, "died\n") == 0))
 	{	
 		printf(RED "%ld %ld %s" RESET, (time), ph->id, str);
+		pthread_mutex_unlock(&ph->table->mtx_print);
 		return ;
 	}
 	if (ft_stop_all(ph->table) == 0)
@@ -48,10 +49,8 @@ void	ft_print_action(t_philo *ph, char *str)
 			printf(YELLOW "%ld %ld %s" RESET, (time), ph->id, str);
 		else if (ft_strcmp(str, "is thinking\n") == 0)
 			printf(CYAN "%ld %ld %s" RESET, (time), ph->id, str);
-		else if (ft_strcmp(str, "take left fork\n") == 0)
-			printf(RED "%ld %ld %s" RESET, (time), ph->id, str);
-		else if (ft_strcmp(str, "take right fork\n") == 0)
-			printf(GREEN "%ld %ld %s" RESET, (time), ph->id, str);
+		else if (ft_strcmp(str, "has taken a fork\n") == 0)
+			printf(BLUE "%ld %ld %s" RESET, (time), ph->id, str);
 		else
 			printf("%ld %ld %s", (time), ph->id, str);
 	}
@@ -77,6 +76,7 @@ void	ft_print_table(t_table *table)
 		}
 	}
 }
+
 int	ft_food(t_table *t)
 {
 	pthread_mutex_lock(&t->mtx_meal);
@@ -91,4 +91,3 @@ int	ft_food(t_table *t)
 		return (0);
 	}
 }
-

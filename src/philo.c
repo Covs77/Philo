@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:39:44 by cleguina          #+#    #+#             */
-/*   Updated: 2024/02/29 20:22:40 by cleguina         ###   ########.fr       */
+/*   Updated: 2024/03/02 12:24:12 by cova             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,5 @@ int	main(int argc, char **argv)
 	ft_init_mutex(&table);
 	ft_init_pthread(&table);
 	ft_free_all(&table);
-	//ft_l();
 	return (0);
 }
