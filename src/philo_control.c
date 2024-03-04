@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_control.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:53:58 by cleguina          #+#    #+#             */
-/*   Updated: 2024/03/02 12:19:11 by cova             ###   ########.fr       */
+/*   Updated: 2024/03/04 17:30:46 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	ft_foodie(t_table *t)
 	}
 	pthread_mutex_unlock(&t->mtx_meal);
 	if (i == t->philo)
-	{	
+	{
 		pthread_mutex_lock(&t->mtx_meal);
 		t->food = 1;
 		pthread_mutex_unlock(&t->mtx_meal);
@@ -88,7 +88,7 @@ int	ft_dead(t_table *t)
 	}
 }
 
-int	ft_stop_all(t_table *t)
+int	ft_stop(t_table *t)
 {
 	if (ft_dead(t) == 1)
 		return (1);

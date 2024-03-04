@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:40:46 by cleguina          #+#    #+#             */
-/*   Updated: 2024/03/02 12:23:07 by cova             ###   ########.fr       */
+/*   Updated: 2024/03/04 17:19:33 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,6 @@ void		*controller(void *args);
 int			ft_check_is_died(t_table *t);
 void		ft_init_joins(t_table *t);
 int			ft_foodie(t_table *t);
-int			ft_stop_all(t_table *t);
+int			ft_stop(t_table *t);
 int			ft_food(t_table *t);
 #endif

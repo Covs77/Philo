@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cova <cova@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cleguina <cleguina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 19:11:46 by cova              #+#    #+#             */
-/*   Updated: 2024/03/02 12:20:19 by cova             ###   ########.fr       */
+/*   Updated: 2024/03/04 18:12:17 by cleguina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,30 +29,30 @@ int	ft_strcmp(char *s1, char *s2)
 	return (0);
 }
 
-void	ft_print_action(t_philo *ph, char *str)
+void	ft_print_action(t_philo *ph, char *s)
 {
 	long	time;
 
 	time = ft_init_time() - ph->table->time_start;
 	pthread_mutex_lock(&ph->table->mtx_print);
-	if (ph->table->dead == 1 && (ft_strcmp(str, "died\n") == 0))
-	{	
-		printf(RED "%ld %ld %s" RESET, (time), ph->id, str);
+	if (ph->table->dead == 1 && (ft_strcmp(s, "died\n") == 0))
+	{
+		printf(RED "%ld %ld %s" RESET, (time), ph->id, s);
 		pthread_mutex_unlock(&ph->table->mtx_print);
+		pthread_mutex_unlock(*&ph->fork_r);
+		pthread_mutex_unlock(&ph->fork_l);
 		return ;
 	}
-	if (ft_stop_all(ph->table) == 0)
+	if ((ft_food(ph->table) == 0) || (ft_dead(ph->table) == 0))
 	{
-		if (ft_strcmp(str, "is eating\n") == 0)
-			printf(MAGENTA "%ld %ld %s" RESET, (time), ph->id, str);
-		else if (ft_strcmp(str, "is sleeping\n") == 0)
-			printf(YELLOW "%ld %ld %s" RESET, (time), ph->id, str);
-		else if (ft_strcmp(str, "is thinking\n") == 0)
-			printf(CYAN "%ld %ld %s" RESET, (time), ph->id, str);
-		else if (ft_strcmp(str, "has taken a fork\n") == 0)
-			printf(BLUE "%ld %ld %s" RESET, (time), ph->id, str);
-		else
-			printf("%ld %ld %s", (time), ph->id, str);
+		if (ft_strcmp(s, "is eating\n") == 0 && ft_stop(ph->table) == 0)
+			printf(MAGENTA "%ld %ld %s" RESET, (time), ph->id, s);
+		else if (ft_strcmp(s, "is sleeping\n") == 0 && ft_stop(ph->table) == 0)
+			printf(YELLOW "%ld %ld %s" RESET, (time), ph->id, s);
+		else if (ft_strcmp(s, "is thinking\n") == 0 && ft_stop(ph->table) == 0)
+			printf(CYAN "%ld %ld %s" RESET, (time), ph->id, s);
+		else if (ft_stop(ph->table) == 0)
+			printf(BLUE "%ld %ld %s" RESET, (time), ph->id, s);
 	}
 	pthread_mutex_unlock(&ph->table->mtx_print);
 }
